@@ -29,15 +29,14 @@ print("READY: Libraries loaded.")
 # =====================================================
 # 2. LOAD DATASET
 # =====================================================
-DATA_PATH = "Twitter_Emotion_Dataset1.csv"
+DATA_PATH = "/mnt/data/Twitter_Emotion_Dataset1.csv"
 
 if not os.path.exists(DATA_PATH):
-    st.error("❌ Dataset tidak ditemukan! Pastikan file 'Twitter_Emotion_Dataset1.csv' berada di folder yang sama.")
+    st.error(f"❌ File tidak ditemukan: {DATA_PATH}")
     st.stop()
 
 df = pd.read_csv(DATA_PATH)
-st.write("Dataset Loaded:", df.shape)
-st.dataframe(df.head())
+st.success("Dataset berhasil dimuat!")
 
 # =====================================================
 # 3. DETECT TEXT & LABEL COLUMN OTOMATIS
@@ -200,4 +199,5 @@ with open("models/label_map.json", "w") as f:
     json.dump({"label2idx": label2idx, "idx2label": idx2label}, f)
 
 print("\nModels saved inside /models folder.")
+
 
