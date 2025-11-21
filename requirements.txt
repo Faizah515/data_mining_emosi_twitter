@@ -1,0 +1,6 @@
+joblib
+scikit-learn
+pandas
+numpy
+nltk
+imbalanced-learn
