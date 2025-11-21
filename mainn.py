@@ -29,22 +29,15 @@ print("READY: Libraries loaded.")
 # =====================================================
 # 2. LOAD DATASET
 # =====================================================
-dataset_path = "/mnt/data/Twitter_Emotion_Dataset1.csv"
+DATA_PATH = "Twitter_Emotion_Dataset1.csv"
 
-if os.path.exists(dataset_path):
-    df = pd.read_csv(dataset_path)
-    print("Dataset loaded from:", dataset_path)
-else:
-    from google.colab import files
-    print("Dataset tidak ditemukan, upload manual:")
-    uploaded = files.upload()
-    fname = list(uploaded.keys())[0]
-    df = pd.read_csv(fname)
-    print("Dataset uploaded:", fname)
+if not os.path.exists(DATA_PATH):
+    st.error("❌ Dataset tidak ditemukan! Pastikan file 'Twitter_Emotion_Dataset1.csv' berada di folder yang sama.")
+    st.stop()
 
-print("Dataset shape:", df.shape)
-print(df.head())
-
+df = pd.read_csv(DATA_PATH)
+st.write("Dataset Loaded:", df.shape)
+st.dataframe(df.head())
 
 # =====================================================
 # 3. DETECT TEXT & LABEL COLUMN OTOMATIS
@@ -207,3 +200,4 @@ with open("models/label_map.json", "w") as f:
     json.dump({"label2idx": label2idx, "idx2label": idx2label}, f)
 
 print("\nModels saved inside /models folder.")
+
